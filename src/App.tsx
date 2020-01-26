@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
+import './App.scss';
+import Login from "./components/login";
+import styled from "styled-components";
+
+const StyledAppContainer = styled.div`
+    height: 100%;
+    width: 90%;
+    margin: 0 auto;
+    padding: 5px;
+`;
 
 const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    return (
+        <Router>
+            <Switch>
+                <Route path={'/login'}>
+                    <StyledAppContainer>
+                        <Login/>
+                    </StyledAppContainer>
+                </Route>
+                <Redirect from="/" to="login" />
+            </Switch>
+        </Router>
+    );
+};
 
 export default App;
