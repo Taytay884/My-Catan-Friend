@@ -2,9 +2,7 @@ export const USER_LOGIN = "USER_LOGIN";
 
 export interface UserLoginAction {
     type: typeof USER_LOGIN;
-    payload: {
-        userName: string;
-    };
+    userName: string;
 }
 
 export type UserActions = UserLoginAction // | UserLogoutAction | ...

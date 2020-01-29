@@ -7,6 +7,7 @@ import Styled from 'styled-components';
 import {userLogin} from '../../redux/actions';
 import {connect} from "react-redux";
 import {RouteComponentProps, withRouter} from "react-router";
+import {UserLoginAction} from "../../types/actions";
 
 const StyledForm = Styled.form`
     height: 100%;
@@ -50,10 +51,7 @@ const StyledInfoError = Styled.span`
 `;
 
 interface LoginProps {
-    userLogin: (userName: string) => ({
-        type: string,
-        payload: { userName: string }
-    });
+    userLogin: (userName: string) => UserLoginAction
 }
 
 interface ISetSubmitting {

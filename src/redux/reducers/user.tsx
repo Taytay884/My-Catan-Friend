@@ -11,7 +11,7 @@ const initialState: IUserState = {
 export default function (state = initialState, action: UserActions): IUserState {
     switch (action.type) {
         case USER_LOGIN: {
-            const {userName} = action.payload;
+            const userName = action.userName;
             localStorage.setItem('loggedInUser', userName);
             return {
                 ...state,
