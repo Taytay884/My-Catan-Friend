@@ -1,4 +1,4 @@
-import {USER_LOGIN} from "../actionTypes";
+import {USER_LOGIN, UserActions} from "../../types/actions";
 
 interface IUserState {
     loggedInUser: string;
@@ -8,12 +8,7 @@ const initialState: IUserState = {
     loggedInUser: '',
 };
 
-interface IAction {
-    type: string;
-    payload: any;
-}
-
-export default function (state = initialState, action: IAction): IUserState {
+export default function (state = initialState, action: UserActions): IUserState {
     switch (action.type) {
         case USER_LOGIN: {
             const {userName} = action.payload;
