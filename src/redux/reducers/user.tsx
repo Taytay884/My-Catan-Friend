@@ -1,6 +1,6 @@
-import {USER_LOGIN, UserActions} from "../../types/actions";
+import {USER_LOGIN, USER_LOGOUT, UserActions} from "../../types/actions";
 
-interface IUserState {
+export interface IUserState {
     loggedInUser: string;
 }
 
@@ -16,6 +16,13 @@ export default function (state = initialState, action: UserActions): IUserState 
             return {
                 ...state,
                 loggedInUser: userName,
+            };
+        }
+        case USER_LOGOUT: {
+            localStorage.removeItem('loggedInUser');
+            return {
+                ...state,
+                loggedInUser: '',
             };
         }
         default:

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import '../../style/App.scss';
 import styled from "styled-components";
 import {Provider} from "react-redux";
@@ -12,7 +12,7 @@ const StyledAppContainer = styled.div`
     padding: 5px;
 `;
 
-const App: React.FC = () => {
+const App: React.FC = (): ReactElement => {
     return (
         <Provider store={store}>
             <StyledAppContainer>

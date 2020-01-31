@@ -2,18 +2,39 @@
 
 import React from 'react';
 import {RouteComponentProps, withRouter} from "react-router";
+import {connect} from "react-redux";
+import {userLogout} from "../../redux/actions";
+import {AppState} from "../../redux/store";
+import {UserLogoutAction} from "../../types/actions";
 
-class GameFinder extends React.Component<RouteComponentProps, {isSubmitting: boolean}> {
-    constructor(props: RouteComponentProps) {
+interface GameFinderState {
+    isSubmitting: boolean
+}
+
+interface LogoutProps {
+    userLogout: () => UserLogoutAction;
+}
+
+interface PropsFromStore {
+    loggedInUser: string
+}
+
+type Props = RouteComponentProps & PropsFromStore & LogoutProps;
+
+class GameFinder extends React.Component<Props, GameFinderState> {
+    constructor(props: Props) {
         super(props);
         this.state = {
             isSubmitting: false
         }
     }
-    handleLogOut() {
+
+    handleLogOut(): void {
         localStorage.removeItem('loggedInUser');
         this.setState({isSubmitting: true});
-        setTimeout(() => {
+        setTimeout((): void => {
+            this.setState({isSubmitting: false});
+            this.props.userLogout();
             this.props.history.push('/login');
         }, 500)
     }
@@ -22,11 +43,18 @@ class GameFinder extends React.Component<RouteComponentProps, {isSubmitting: boo
         return (
             <div>
                 <h1>Game Finder Component.</h1>
-                <button onClick={this.handleLogOut.bind(this)} disabled={this.state.isSubmitting}>Logout</button>
+                <div>
+                    <span>{this.props.loggedInUser} </span>
+                    <button onClick={this.handleLogOut.bind(this)} disabled={this.state.isSubmitting}>Logout</button>
+                </div>
             </div>
         )
     }
-
 }
 
-export default withRouter(GameFinder);
+function mapStateToProps(state: AppState): PropsFromStore {
+    const {loggedInUser} = state.user;
+    return {loggedInUser};
+}
+
+export default connect(mapStateToProps, {userLogout})(withRouter(GameFinder));

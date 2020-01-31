@@ -2,18 +2,9 @@ import React from 'react';
 import {BrowserRouter as Router, Redirect, Switch} from "react-router-dom";
 import '../../style/App.scss';
 import Login from "../Login/Login";
-import GameFinder from "../GameFinder/GameFinder";
+import ResolveAuthorize from "../Authorization/ResolveAuthorize";
 
-const PrivateRoute = ({...options}) => {
-    const isLoggedIn = localStorage.getItem('loggedInUser');
-    return (
-        isLoggedIn
-            ? <GameFinder {...options} />
-            : <Redirect to='/login'/>
-    )
-};
-
-const LoginRoute = ({path}: {path: string}) => {
+const LoginRoute = ({path}: { path: string }) => {
     const isLoggedIn = localStorage.getItem('loggedInUser');
     return (isLoggedIn ? <Redirect to={'/'}/> : <Login/>);
 };
@@ -22,7 +13,7 @@ const AppRouter: React.FC = () => {
     return (
         <Router>
             <Switch>
-                <PrivateRoute path={'/game-finder'} component={GameFinder}/>
+                <ResolveAuthorize path={'/game-finder'}/>
                 <LoginRoute path={'/login'}/>
                 <Redirect from="/" to="game-finder"/>
             </Switch>

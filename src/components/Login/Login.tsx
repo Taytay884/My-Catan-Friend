@@ -1,7 +1,7 @@
 // Login Form Component
 
 import React from 'react';
-import {Formik} from 'formik';
+import {Formik, FormikHelpers, FormikProps} from 'formik';
 import * as Yup from 'yup';
 import Styled from 'styled-components';
 import {userLogin} from '../../redux/actions';
@@ -50,18 +50,19 @@ const StyledInfoError = Styled.span`
     font-size: 0.8rem;
 `;
 
+interface FormValues {
+    email: string;
+    password: string;
+}
+
 interface LoginProps {
     userLogin: (userName: string) => UserLoginAction
 }
 
-interface ISetSubmitting {
-    setSubmitting: (isSubmitting: boolean) => void;
-}
-
 type Props = LoginProps & RouteComponentProps;
 
-class Login extends React.Component<Props, any> {
-    private handleSubmitFormik(values: { email: string, password: string }, {setSubmitting}: ISetSubmitting): void {
+class Login extends React.Component<Props, {}> {
+    private handleSubmitFormik(values: FormValues, {setSubmitting}: FormikHelpers<FormValues>): void {
         setSubmitting(true);
         setTimeout(() => {
             this.props.userLogin(values.email);
@@ -70,17 +71,20 @@ class Login extends React.Component<Props, any> {
         }, 500);
     }
 
+    private initialValues = {email: '', password: ''};
+    private validationSchema = Yup.object().shape({
+        email: Yup.string().email().required('Required'),
+        password: Yup.string().required('Required')
+            .min(8, "Password must contain 8 characters.")
+            .matches(/(?=.*[0-9])/, "Password must contain a number.")
+    });
+
     render() {
         const loginFormik = (<Formik
-            initialValues={{email: '', password: ''}}
+            initialValues={this.initialValues}
             onSubmit={this.handleSubmitFormik.bind(this)}
-            validationSchema={Yup.object().shape({
-                email: Yup.string().email().required('Required'),
-                password: Yup.string().required('Required')
-                    .min(8, "Password must contain 8 characters.")
-                    .matches(/(?=.*[0-9])/, "Password must contain a number.")
-            })}>
-            {props => {
+            validationSchema={this.validationSchema}>
+            {(props: FormikProps<FormValues>) => {
                 const {
                     values, touched, errors, isSubmitting,
                     handleChange, handleBlur, handleSubmit
