@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {userLogout} from "../../redux/actions";
 import {AppState} from "../../redux/store";
 import {UserLogoutAction} from "../../types/actions";
+import RoomList from "./RoomList/RoomList";
 
 interface GameFinderState {
     isSubmitting: boolean
@@ -46,6 +47,7 @@ class GameFinder extends React.Component<Props, GameFinderState> {
                 <div>
                     <span>{this.props.loggedInUser} </span>
                     <button onClick={this.handleLogOut.bind(this)} disabled={this.state.isSubmitting}>Logout</button>
+                    <RoomList/>
                 </div>
             </div>
         )

@@ -1,0 +1,51 @@
+[
+  {
+    "id": "5e3f11be39e50d23e2e2a6f2",
+    "number": 609,
+    "name": "Catan Basic - Tel Aviv",
+    "participants": 2,
+    "maxParticipants": 4
+  },
+  {
+    "id": "5e3f11be62acd825f0ea4703",
+    "number": 348,
+    "name": "Catan Cities & Knights - Tel Aviv",
+    "participants": 1,
+    "maxParticipants": 6
+  },
+  {
+    "id": "5e3f11bebddf72bdc819bcf5",
+    "number": 183,
+    "name": "Catan Basic - Beersheva",
+    "participants": 3,
+    "maxParticipants": 4
+  },
+  {
+    "id": "5e3f11bea4411318c4a01f21",
+    "number": 227,
+    "name": "Catan Basic - Haifa",
+    "participants": 4,
+    "maxParticipants": 6
+  },
+  {
+    "id": "5e3f11be19e9fdf3d32220c4",
+    "number": 801,
+    "name": "Catan Seafarers - Ramla",
+    "participants": 4,
+    "maxParticipants": 4
+  },
+  {
+    "id": "5e3f11be225e9adf9eca0ca5",
+    "number": 140,
+    "name": "CATAN Traders & Barbarians - Yad Rambam",
+    "participants": 2,
+    "maxParticipants": 4
+  },
+  {
+    "id": "5e3f11bec904a954d9e14a5a",
+    "number": 720,
+    "name": "Catan Basic - Hod HaSharon",
+    "participants": 3,
+    "maxParticipants": 6
+  }
+]
