@@ -34,7 +34,7 @@ class RoomList extends React.Component<Props, RoomListState> {
 
     createRoomComponents() {
         return this.state.rooms.map((room: IRoom) => {
-            return <Room room={room}/>
+            return <Room room={room} key={room.id}/>
         });
     }
 

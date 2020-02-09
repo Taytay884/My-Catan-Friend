@@ -7,6 +7,7 @@ import {userLogout} from "../../redux/actions";
 import {AppState} from "../../redux/store";
 import {UserLogoutAction} from "../../types/actions";
 import RoomList from "./RoomList/RoomList";
+import styled from 'styled-components';
 
 interface GameFinderState {
     isSubmitting: boolean
@@ -19,6 +20,14 @@ interface LogoutProps {
 interface PropsFromStore {
     loggedInUser: string
 }
+
+const StyledGameFinderWrapper = styled.div`
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+`;
 
 type Props = RouteComponentProps & PropsFromStore & LogoutProps;
 
@@ -42,14 +51,13 @@ class GameFinder extends React.Component<Props, GameFinderState> {
 
     render() {
         return (
-            <div>
-                <h1>Game Finder Component.</h1>
+            <StyledGameFinderWrapper>
                 <div>
                     <span>{this.props.loggedInUser} </span>
                     <button onClick={this.handleLogOut.bind(this)} disabled={this.state.isSubmitting}>Logout</button>
                     <RoomList/>
                 </div>
-            </div>
+            </StyledGameFinderWrapper>
         )
     }
 }
