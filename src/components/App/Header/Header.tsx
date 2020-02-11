@@ -4,8 +4,9 @@ import styled from "styled-components";
 import {COLORS, HEADER_HEIGHT, MENU_BUTTON_WIDTH} from "../../../style/const";
 
 const StyledHeader = styled.div`
-    background-color: ${COLORS.SUNSHINE};
+    background-color: ${COLORS.VERMILLION};
     height: ${HEADER_HEIGHT};
+    color: ${COLORS.WHITE};
     width: 100%;
     padding: 0 10px;
     display: flex;
@@ -18,6 +19,10 @@ const StyledHeader = styled.div`
     }
 `;
 
+const StyledH2 = styled.h2`
+    text-shadow: 0 0 2px black;
+`;
+
 const StyledMenuButton = styled.button`
     display: block;
     width: ${MENU_BUTTON_WIDTH};
@@ -26,7 +31,7 @@ const StyledMenuButton = styled.button`
 const Header: React.FC = (): ReactElement => {
     return (
         <StyledHeader>
-            <h2>My Catan Friend</h2>
+            <StyledH2>My Catan Friend</StyledH2>
             <StyledMenuButton>Menu</StyledMenuButton>
         </StyledHeader>
     );

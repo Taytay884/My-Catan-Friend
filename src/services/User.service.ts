@@ -4,7 +4,7 @@ export class UserService {
             setTimeout(() => {
                 const userName: string | null = localStorage.getItem('loggedInUser');
                 userName ? resolve(userName) : reject();
-            }, 1500)
+            }, 100)
         });
     }
 }

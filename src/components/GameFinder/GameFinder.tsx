@@ -52,11 +52,9 @@ class GameFinder extends React.Component<Props, GameFinderState> {
     render() {
         return (
             <StyledGameFinderWrapper>
-                <div>
                     <span>{this.props.loggedInUser} </span>
-                    <button onClick={this.handleLogOut.bind(this)} disabled={this.state.isSubmitting}>Logout</button>
+                    <button style={{marginBottom: '5px'}} onClick={this.handleLogOut.bind(this)} disabled={this.state.isSubmitting}>Logout</button>
                     <RoomList/>
-                </div>
             </StyledGameFinderWrapper>
         )
     }

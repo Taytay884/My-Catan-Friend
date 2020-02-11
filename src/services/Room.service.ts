@@ -6,7 +6,7 @@ export class RoomService {
         return new Promise<IRoom[]>((resolve): void => {
             setTimeout(() => {
                 resolve(Rooms);
-            }, 1500)
+            }, 100)
         });
     }
 }

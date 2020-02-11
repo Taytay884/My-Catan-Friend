@@ -18,6 +18,7 @@ const StyledAppContainer = styled.div`
 
 const StyleAppRouterWrapper = styled.div`
     height: calc(100% - ${HEADER_HEIGHT});
+    padding: 5px;
     AppRouter {
         height: 100%;
         width: 100%;
