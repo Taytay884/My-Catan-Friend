@@ -5,20 +5,23 @@ import {RouteComponentProps, withRouter} from "react-router";
 import {connect} from "react-redux";
 import {userLogout} from "../../redux/actions";
 import {AppState} from "../../redux/store";
-import {UserLogoutAction} from "../../types/actions";
 import RoomList from "./RoomList/RoomList";
 import styled from 'styled-components';
+import RoomDetails from "./RoomDetails/RoomDetails";
+import {IRoom} from "../../types/Room";
+import {UserLogoutAction} from "../../types/actions";
 
 interface GameFinderState {
     isSubmitting: boolean
 }
 
-interface LogoutProps {
+interface DispatcherToProps {
     userLogout: () => UserLogoutAction;
 }
 
 interface PropsFromStore {
-    loggedInUser: string
+    loggedInUser: string;
+    currentRoom: IRoom | null;
 }
 
 const StyledGameFinderWrapper = styled.div`
@@ -29,7 +32,7 @@ const StyledGameFinderWrapper = styled.div`
     flex-direction: column;
 `;
 
-type Props = RouteComponentProps & PropsFromStore & LogoutProps;
+type Props = RouteComponentProps & PropsFromStore & DispatcherToProps;
 
 class GameFinder extends React.Component<Props, GameFinderState> {
     constructor(props: Props) {
@@ -52,9 +55,12 @@ class GameFinder extends React.Component<Props, GameFinderState> {
     render() {
         return (
             <StyledGameFinderWrapper>
-                    <span>{this.props.loggedInUser} </span>
-                    <button style={{marginBottom: '5px'}} onClick={this.handleLogOut.bind(this)} disabled={this.state.isSubmitting}>Logout</button>
-                    <RoomList/>
+                <span>{this.props.loggedInUser} </span>
+                <button style={{marginBottom: '5px'}} onClick={this.handleLogOut.bind(this)}
+                        disabled={this.state.isSubmitting}>Logout
+                </button>
+                {this.props.currentRoom ? <RoomDetails room={this.props.currentRoom}/> : <RoomList/>}
+
             </StyledGameFinderWrapper>
         )
     }
@@ -62,7 +68,8 @@ class GameFinder extends React.Component<Props, GameFinderState> {
 
 function mapStateToProps(state: AppState): PropsFromStore {
     const {loggedInUser} = state.user;
-    return {loggedInUser};
+    const {currentRoom} = state.room;
+    return {loggedInUser, currentRoom};
 }
 
 export default connect(mapStateToProps, {userLogout})(withRouter(GameFinder));

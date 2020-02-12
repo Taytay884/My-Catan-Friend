@@ -3,9 +3,12 @@ import Room from "./Room/Room";
 import {RoomService} from "../../../services/Room.service";
 import {IRoom} from "../../../types/Room";
 import styled from "styled-components";
+import {connect} from "react-redux";
+import {setRoom} from "../../../redux/actions";
+import {SetRoomAction} from "../../../types/actions";
 
 interface Props {
-
+    setRoom: (room: IRoom) => SetRoomAction;
 }
 
 interface RoomListState {
@@ -23,7 +26,7 @@ class RoomList extends React.Component<Props, RoomListState> {
         super(props);
         this.state = {
             rooms: [],
-            loading: false
+            loading: false,
         };
     }
 
@@ -40,7 +43,7 @@ class RoomList extends React.Component<Props, RoomListState> {
 
     createRoomComponents() {
         return this.state.rooms.map((room: IRoom) => {
-            return <Room room={room} key={room.id}/>
+            return room ? <Room setRoom={this.props.setRoom} room={room} key={room.id}/> : <div>Error in this room.</div>
         });
     }
 
@@ -54,4 +57,4 @@ class RoomList extends React.Component<Props, RoomListState> {
     }
 }
 
-export default RoomList;
+export default connect(null, {setRoom})(RoomList);

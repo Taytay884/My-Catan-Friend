@@ -1,10 +1,12 @@
 import React from "react";
-import {IRoom} from "../../../../types/Room";
 import styled from "styled-components";
 import {COLORS} from "../../../../style/const";
+import {IRoom, IRoomDetails} from "../../../../types/Room";
+import {SetRoomAction} from "../../../../types/actions";
 
 interface Props {
-    room: IRoom;
+    room: IRoomDetails;
+    setRoom: (room: IRoom) => SetRoomAction;
 }
 
 interface RoomState {
@@ -45,9 +47,6 @@ const StyledRoomJoinButton = styled.div`
 `;
 
 class Room extends React.Component<Props, RoomState> {
-    constructor(props: Props) {
-        super(props);
-    }
 
     render() {
         return (
@@ -60,7 +59,7 @@ class Room extends React.Component<Props, RoomState> {
                     <span>{this.props.room.participants} / {this.props.room.maxParticipants}</span>
                 </StyledRoomContentRight>
                 <StyledRoomJoinButton>
-                    <button disabled={this.props.room.participants === this.props.room.maxParticipants}>Join</button>
+                    <button onClick={() => this.props.setRoom(this.props.room)} disabled={this.props.room.participants === this.props.room.maxParticipants}>Join</button>
                 </StyledRoomJoinButton>
             </StyledRoom>
         )
